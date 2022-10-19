@@ -6,14 +6,6 @@ class GroceryStoreDetails extends StatelessWidget {
 
   final GroceryProduct product;
 
-  /*Hero(
-          tag: 'list_${product.name}',
-          child: Image.asset(
-            product.image,
-            fit: BoxFit.cover,
-          ),
-        ),*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,8 +18,29 @@ class GroceryStoreDetails extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Column(
-              children: [],
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Hero(
+                      tag: 'list_${product.name}',
+                      child: Image.asset(
+                        product.image,
+                        fit: BoxFit.cover,
+                        height: MediaQuery.of(context).size.height * 0.36,
+                      ),
+                    ),
+                  ),
+                  Text(product.name,
+                      style: Theme.of(context).textTheme.headline4?.copyWith(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          )),
+                ],
+              ),
             ),
           ),
           Padding(
