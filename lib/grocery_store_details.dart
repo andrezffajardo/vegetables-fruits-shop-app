@@ -29,8 +29,10 @@ class GroceryStoreDetails extends StatelessWidget {
                       tag: 'list_${product.name}',
                       child: Image.asset(
                         product.image,
-                        fit: BoxFit.cover,
-                        height: MediaQuery.of(context).size.height * 0.35,
+                        //fit: BoxFit.cover,
+                        //height: MediaQuery.of(context).size.height * 0.35,
+                        height: 200.0,
+                        width: 200.0,
                       ),
                     ),
                   ),
