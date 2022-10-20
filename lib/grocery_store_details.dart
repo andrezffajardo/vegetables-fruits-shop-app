@@ -19,26 +19,64 @@ class GroceryStoreDetails extends StatelessWidget {
         children: [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: Hero(
                       tag: 'list_${product.name}',
                       child: Image.asset(
                         product.image,
                         fit: BoxFit.cover,
-                        height: MediaQuery.of(context).size.height * 0.36,
+                        height: MediaQuery.of(context).size.height * 0.35,
                       ),
                     ),
                   ),
-                  Text(product.name,
-                      style: Theme.of(context).textTheme.headline4?.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          )),
+                  Text(
+                    product.name,
+                    style: Theme.of(context).textTheme.headline5?.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(height: 15),
+                  Text(
+                    product.weight,
+                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  Row(
+                    children: [
+                      Spacer(),
+                      Text(
+                        '\$${product.price}',
+                        style: Theme.of(context).textTheme.headline5?.copyWith(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  Text(
+                    'About the Product',
+                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    product.description,
+                    style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w300,
+                        ),
+                  ),
                 ],
               ),
             ),
