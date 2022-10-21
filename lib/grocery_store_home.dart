@@ -120,9 +120,13 @@ class _GroceryStoreHomeState extends State<GroceryStoreHome> {
                                         scrollDirection: Axis.horizontal,
                                         child: Row(
                                           children: List.generate(
-                                            10,
+                                            bloc.cart.length,
                                             (index) => CircleAvatar(
-                                              backgroundColor: Colors.blue,
+                                              backgroundColor: Color.fromRGBO(
+                                                  255, 255, 255, 0.2),
+                                              backgroundImage: AssetImage(
+                                                bloc.cart[index].product.image,
+                                              ),
                                             ),
                                           ),
                                         ),

@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:grocery_store_app/grocery_product.dart';
 
 class GroceryStoreDetails extends StatelessWidget {
-  const GroceryStoreDetails({super.key, required this.product});
+  const GroceryStoreDetails(
+      {super.key, required this.product, required this.onProductAdded});
 
   final GroceryProduct product;
+  final VoidCallback onProductAdded;
+
+  void _addToCart() {
+    onProductAdded();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +119,7 @@ class GroceryStoreDetails extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: _addToCart,
                   ),
                 ),
               ],
