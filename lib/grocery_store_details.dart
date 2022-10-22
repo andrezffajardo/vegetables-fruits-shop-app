@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_store_app/grocery_product.dart';
 
-class GroceryStoreDetails extends StatelessWidget {
+class GroceryStoreDetails extends StatefulWidget {
   const GroceryStoreDetails(
       {super.key, required this.product, required this.onProductAdded});
 
   final GroceryProduct product;
   final VoidCallback onProductAdded;
 
-  void _addToCart() {
-    onProductAdded();
+  @override
+  State<GroceryStoreDetails> createState() => _GroceryStoreDetailsState();
+}
+
+class _GroceryStoreDetailsState extends State<GroceryStoreDetails> {
+  String heroTag = '';
+
+  void _addToCart(BuildContext context) {
+    setState(() {
+      heroTag = 'details';
+    });
+    widget.onProductAdded();
+    Navigator.of(context).pop();
   }
 
   @override
@@ -32,9 +43,9 @@ class GroceryStoreDetails extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Hero(
-                      tag: 'list_${product.name}',
+                      tag: 'list_${widget.product.name}$heroTag',
                       child: Image.asset(
-                        product.image,
+                        widget.product.image,
                         //fit: BoxFit.cover,
                         //height: MediaQuery.of(context).size.height * 0.35,
                         height: 200.0,
@@ -43,7 +54,7 @@ class GroceryStoreDetails extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    product.name,
+                    widget.product.name,
                     style: Theme.of(context).textTheme.headline5?.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
@@ -51,7 +62,7 @@ class GroceryStoreDetails extends StatelessWidget {
                   ),
                   const SizedBox(height: 15),
                   Text(
-                    product.weight,
+                    widget.product.weight,
                     style: Theme.of(context).textTheme.subtitle1?.copyWith(
                           color: Colors.grey,
                           fontWeight: FontWeight.bold,
@@ -61,7 +72,7 @@ class GroceryStoreDetails extends StatelessWidget {
                     children: [
                       Spacer(),
                       Text(
-                        '\$${product.price}',
+                        '\$${widget.product.price}',
                         style: Theme.of(context).textTheme.headline5?.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
@@ -79,7 +90,7 @@ class GroceryStoreDetails extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    product.description,
+                    widget.product.description,
                     style: Theme.of(context).textTheme.subtitle1?.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.w300,
@@ -119,7 +130,7 @@ class GroceryStoreDetails extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onPressed: _addToCart,
+                    onPressed: () => _addToCart(context),
                   ),
                 ),
               ],

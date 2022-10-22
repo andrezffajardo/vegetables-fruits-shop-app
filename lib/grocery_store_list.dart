@@ -26,6 +26,8 @@ class GroceryStoreList extends StatelessWidget {
             onTap: () {
               Navigator.of(context).push(
                 PageRouteBuilder(
+                  transitionDuration: const Duration(milliseconds: 1200),
+                  reverseTransitionDuration: const Duration(milliseconds: 1200),
                   pageBuilder: (context, animation, __) {
                     return FadeTransition(
                       opacity: animation,
@@ -40,6 +42,7 @@ class GroceryStoreList extends StatelessWidget {
               );
             },
             child: Card(
+              clipBehavior: Clip.hardEdge,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
