@@ -1,4 +1,4 @@
-# grocery_store_app
+# vegetables_fruits_shop_app
 
 A new Flutter project.
 
