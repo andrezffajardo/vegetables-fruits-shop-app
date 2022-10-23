@@ -128,18 +128,35 @@ class _GroceryStoreHomeState extends State<GroceryStoreHome> {
                                                 padding:
                                                     const EdgeInsets.symmetric(
                                                         horizontal: 8.0),
-                                                child: Hero(
-                                                  tag:
-                                                      'list_${bloc.cart[index].product.name}details',
-                                                  child: CircleAvatar(
-                                                    backgroundColor:
-                                                        Color.fromRGBO(
-                                                            255, 255, 255, 0.5),
-                                                    backgroundImage: AssetImage(
-                                                      bloc.cart[index].product
-                                                          .image,
+                                                child: Stack(
+                                                  children: [
+                                                    Hero(
+                                                      tag:
+                                                          'list_${bloc.cart[index].product.name}details',
+                                                      child: CircleAvatar(
+                                                        backgroundColor:
+                                                            Color.fromRGBO(255,
+                                                                255, 255, 0.5),
+                                                        backgroundImage:
+                                                            AssetImage(
+                                                          bloc.cart[index]
+                                                              .product.image,
+                                                        ),
+                                                      ),
                                                     ),
-                                                  ),
+                                                    Positioned(
+                                                      right: 0,
+                                                      child: CircleAvatar(
+                                                          radius: 10,
+                                                          backgroundColor:
+                                                              Colors.red,
+                                                          child: Text('3',
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                              ))),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ),
