@@ -98,7 +98,7 @@ class GroceryStoreCart extends StatelessWidget {
               ),
               Spacer(),
               Text(
-                '\$${bloc.totalPriceElements()}',
+                '\$${bloc.totalPriceElements().toStringAsFixed(2)}',
                 style: Theme.of(context).textTheme.headline4?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
