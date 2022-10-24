@@ -4,6 +4,8 @@ import 'package:grocery_store_app/grocery_provider.dart';
 
 import 'package:grocery_store_app/grocery_store_list.dart';
 
+import 'grocery_store_cart.dart';
+
 const backgroundColor = Color(0XFFF6F5F2);
 const cartBarHeight = 100.0;
 const _panelTransition = Duration(milliseconds: 500);
@@ -96,7 +98,7 @@ class _GroceryStoreHomeState extends State<GroceryStoreHome> {
                     left: 0,
                     right: 0,
                     top: _getTopForBlackPanel(bloc.groceryState, size),
-                    height: size.height,
+                    height: size.height - kToolbarHeight,
                     child: GestureDetector(
                       onVerticalDragUpdate: _onVerticalGesture,
                       child: Container(
@@ -105,73 +107,113 @@ class _GroceryStoreHomeState extends State<GroceryStoreHome> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(25.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Cart',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0),
-                                          child: Row(
-                                            children: List.generate(
-                                              bloc.cart.length,
-                                              (index) => Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 8.0),
-                                                child: Stack(
-                                                  children: [
-                                                    Hero(
-                                                      tag:
-                                                          'list_${bloc.cart[index].product.name}details',
-                                                      child: CircleAvatar(
-                                                        backgroundColor:
-                                                            Color.fromRGBO(255,
-                                                                255, 255, 0.5),
-                                                        backgroundImage:
-                                                            AssetImage(
-                                                          bloc.cart[index]
-                                                              .product.image,
+                                child: AnimatedSwitcher(
+                                  duration: _panelTransition,
+                                  child: SizedBox(
+                                    height: kToolbarHeight,
+                                    child:
+                                        bloc.groceryState == GroceryState.normal
+                                            ? Row(
+                                                children: [
+                                                  Text(
+                                                    'Cart',
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child:
+                                                        SingleChildScrollView(
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .symmetric(
+                                                                horizontal:
+                                                                    8.0),
+                                                        child: Row(
+                                                          children:
+                                                              List.generate(
+                                                            bloc.cart.length,
+                                                            (index) => Padding(
+                                                              padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                  horizontal:
+                                                                      8.0),
+                                                              child: Stack(
+                                                                children: [
+                                                                  Hero(
+                                                                    tag:
+                                                                        'list_${bloc.cart[index].product.name}details',
+                                                                    child:
+                                                                        CircleAvatar(
+                                                                      backgroundColor: Color.fromRGBO(
+                                                                          255,
+                                                                          255,
+                                                                          255,
+                                                                          0.5),
+                                                                      backgroundImage:
+                                                                          AssetImage(
+                                                                        bloc
+                                                                            .cart[index]
+                                                                            .product
+                                                                            .image,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  Positioned(
+                                                                    right: 0,
+                                                                    child:
+                                                                        CircleAvatar(
+                                                                      radius:
+                                                                          10,
+                                                                      backgroundColor:
+                                                                          Colors
+                                                                              .red,
+                                                                      child:
+                                                                          Text(
+                                                                        bloc.cart[index]
+                                                                            .quantity
+                                                                            .toString(),
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color:
+                                                                              Colors.white,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
-                                                    Positioned(
-                                                      right: 0,
-                                                      child: CircleAvatar(
-                                                          radius: 10,
-                                                          backgroundColor:
-                                                              Colors.red,
-                                                          child: Text('3',
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                              ))),
+                                                  ),
+                                                  CircleAvatar(
+                                                    backgroundColor:
+                                                        const Color(0xFFF4C459),
+                                                    child: Text(
+                                                      style: const TextStyle(
+                                                        color: Colors.black,
+                                                      ),
+                                                      bloc
+                                                          .totalCartElements()
+                                                          .toString(),
                                                     ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    CircleAvatar(
-                                      backgroundColor: Colors.red,
-                                    )
-                                  ],
+                                                  )
+                                                ],
+                                              )
+                                            : const SizedBox.shrink(),
+                                  ),
                                 ),
                               ),
-                              Spacer(),
-                              Placeholder(),
+                              Expanded(child: GroceryStoreCart()),
                             ],
                           )),
                     ),
