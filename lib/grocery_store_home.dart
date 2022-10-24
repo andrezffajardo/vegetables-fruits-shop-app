@@ -155,7 +155,7 @@ class _GroceryStoreHomeState extends State<GroceryStoreHome> {
                                                                           255,
                                                                           255,
                                                                           255,
-                                                                          0.5),
+                                                                          0.8),
                                                                       backgroundImage:
                                                                           AssetImage(
                                                                         bloc

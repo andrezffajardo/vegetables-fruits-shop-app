@@ -24,6 +24,62 @@ class GroceryStoreCart extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                 ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: bloc.cart.length,
+                    itemBuilder: (context, index) {
+                      final item = bloc.cart[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15.0),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor:
+                                  Color.fromRGBO(255, 255, 255, 0.8),
+                              backgroundImage: AssetImage(
+                                item.product.image,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              item.quantity.toString(),
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              'x',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              item.product.name,
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            Spacer(),
+                            Text(
+                              '\$${(item.product.price * item.quantity).toStringAsFixed(2)}',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),
