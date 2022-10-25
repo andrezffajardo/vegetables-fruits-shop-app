@@ -74,6 +74,13 @@ class GroceryStoreCart extends StatelessWidget {
                                 color: Colors.white,
                               ),
                             ),
+                            IconButton(
+                              icon: Icon(Icons.delete),
+                              onPressed: () {
+                                bloc.deleteProduct(item);
+                              },
+                              color: Colors.white,
+                            ),
                           ],
                         ),
                       );

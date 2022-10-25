@@ -35,6 +35,11 @@ class GroceryStoreBLoC with ChangeNotifier {
     notifyListeners();
   }
 
+  void deleteProduct(GroceryProductItem productItem) {
+    cart.remove(productItem);
+    notifyListeners();
+  }
+
   int totalCartElements() => cart.fold<int>(
         0,
         (previousValue, element) => previousValue + element.quantity,
